@@ -1,28 +1,35 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX 256
+#define ReadEnd  0
+#define WriteEnd 1
 
-void server(int* client_send, int* client_receive) {
+void server(int* client2server, int* server2client) {
 
-	close(client_send[1]); // READ pipe
-	close(client_receive[0]); // WRITE pipe
+	close(client2server[WriteEnd]);
+	close(server2client[ReadEnd]);
 
 	char data[MAX];
 
 	while (true) {
-		read(client_send[0], data, sizeof(data));
+		read(client2server[ReadEnd], data, sizeof(data));
 		int start, end;
 		sscanf(data, "%d %d", &start, &end);
-		printf("SERVER: start = %d end = %d\n", start, end);
+		if (start == 0 && end == 0) {
+			close(server2client[WriteEnd]);
+			exit(0);
+		}
+		printf("SERVER received: start = %d end = %d\n", start, end);
 		int sum = 0;
 		for (int i = start; i <= end; i++) {
 			sum += i;
 		}
 
 		sprintf(data, "sum is %d", sum);
-		write(client_receive[1], data, strlen(data) + 1);
+		write(server2client[WriteEnd], data, strlen(data) + 1);
 	}
 
 }

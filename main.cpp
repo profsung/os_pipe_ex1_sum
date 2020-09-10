@@ -9,14 +9,14 @@ void server(int *, int *);
 void client(int *, int *);
 
 int main() {
-	int client_send[2];
-	int client_receive[2];
+	int client2serverFD[2];
+	int server2clientFD[2];
 	// create a pipe
-	if (pipe(client_send) < 0) {
+	if (pipe(client2serverFD) < 0) {
 		cerr << "cannot create a pipe." << endl;
 		exit(1);
 	}
-	if (pipe(client_receive) < 0) {
+	if (pipe(server2clientFD) < 0) {
 		cerr << "cannot create a pipe." << endl;
 		exit(1);
 	}
@@ -26,8 +26,8 @@ int main() {
 		cerr << "cannot fork()" << endl;
 		exit(1);
 	} else if (pid == 0) { // child process
-		server(client_send, client_receive);
+		server(client2serverFD, server2clientFD);
 	} else { // parent process
-		client(client_send, client_receive);
+		client(client2serverFD, server2clientFD);
 	}
 }
