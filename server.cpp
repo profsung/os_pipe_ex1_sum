@@ -1,4 +1,9 @@
-#include "common_includes.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "my_defs.h"
 
 void server(int* client2server, int* server2client) {
 

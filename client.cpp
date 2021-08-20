@@ -1,4 +1,9 @@
-#include "common_includes.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "my_defs.h"
 
 void client(int *client2server, int *server2client)
 {
@@ -7,20 +12,21 @@ void client(int *client2server, int *server2client)
 	close(server2client[WriteEnd]);
 
 	char data[MAX];
+	char line[MAX];
 
 	while (true)
 	{
 		int start, end;
 		int no;
-		do
+		for (;;)
 		{
 			printf("Enter: (start end) (0 0 to quit): ");
-			no = scanf("%d %d", &start, &end);
-
-			// read the remaining chars typed
-			char c;
-			while ((c = getchar()) != '\n' && c != EOF) ;
-		} while (no != 2);
+			fgets(line, MAX, stdin);
+			no = sscanf(line, "%d %d", &start, &end);
+			if (no == 2)
+				break;
+			printf("\tEnter two integers (start end)\n");
+		}
 
 		// client sends start/end to server to request for computing(sum)
 		sprintf(data, "%d %d", start, end);

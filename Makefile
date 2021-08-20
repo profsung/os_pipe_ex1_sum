@@ -14,4 +14,4 @@ clean:
 	rm *.o a.out *.zip
 
 zip:
-	zip pipe_sum.zip *.cpp Makefile
+	zip pipe_sum.zip *.h *.cpp Makefile
