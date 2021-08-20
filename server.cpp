@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-
-#define MAX 256
-#define ReadEnd  0
-#define WriteEnd 1
+#include "common_includes.h"
 
 void server(int* client2server, int* server2client) {
 
@@ -23,11 +16,14 @@ void server(int* client2server, int* server2client) {
 			exit(0);
 		}
 		printf("SERVER received: start = %d end = %d\n", start, end);
+
+		// server computes sum
 		int sum = 0;
 		for (int i = start; i <= end; i++) {
 			sum += i;
 		}
 
+		// server sends to client the computing results
 		sprintf(data, "sum is %d", sum);
 		write(server2client[WriteEnd], data, strlen(data) + 1);
 	}

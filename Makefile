@@ -9,3 +9,9 @@ client.o: client.cpp
 
 main.o: main.cpp
 	g++ -c -g main.cpp
+
+clean:
+	rm *.o a.out *.zip
+
+zip:
+	zip pipe_sum.zip *.cpp Makefile
