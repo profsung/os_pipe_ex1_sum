@@ -24,7 +24,7 @@ void server(int* client2server, int* server2client) {
 		}
 		printf("SERVER received: start = %d end = %d\n", start, end);
 
-		// server computes sum
+		// SERVER TASK: server computes sum
 		int sum = 0;
 		for (int i = start; i <= end; i++) {
 			sum += i;
