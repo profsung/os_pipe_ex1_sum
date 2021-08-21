@@ -33,6 +33,7 @@ int main() {
 	}
 	else { // parent process
 		client(client2serverFD, server2clientFD);
+		// client has done. wait for server to exit
 		for (;;) {
 			int status;
 			printf("waiting for child process to terminate\n");

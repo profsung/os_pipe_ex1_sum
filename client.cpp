@@ -42,5 +42,5 @@ void client(int *client2server, int *server2client)
 		// client receives computation results from server
 		read(server2client[ReadEnd], data, sizeof(data));
 		printf("Client received: %s\n", data);
-	}
+	} // while
 }
