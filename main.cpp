@@ -13,7 +13,7 @@ int main() {
 	int client2serverFD[2]; // client => server
 	int server2clientFD[2]; // server => client
 
-	// create a pipe
+	// create two (unnamed) pipes for bidirectional communication
 	if (pipe(client2serverFD) < 0) {
 		printf("cannot create a pipe.\n");
 		exit(1);
