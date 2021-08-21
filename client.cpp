@@ -5,6 +5,7 @@
 
 #include "my_defs.h"
 
+// parent process
 void client(int *client2server, int *server2client)
 {
 
@@ -30,12 +31,12 @@ void client(int *client2server, int *server2client)
 
 		// client sends start/end to server to request for computing(sum)
 		sprintf(data, "%d %d", start, end);
-		write(client2server[WriteEnd], data, strlen(data) + 1);
+		write(client2server[WriteEnd], data, strlen(data) + 1); // send including '\0'
 
 		if (start == 0 && end == 0)
 		{
 			close(client2server[WriteEnd]);
-			exit(0);
+			break; // client has done
 		}
 
 		// client receives computation results from server

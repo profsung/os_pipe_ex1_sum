@@ -3,6 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX 256
+#define MAX 1024
 #define ReadEnd  0
 #define WriteEnd 1

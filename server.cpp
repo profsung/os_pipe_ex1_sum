@@ -5,6 +5,7 @@
 
 #include "my_defs.h"
 
+// child process
 void server(int* client2server, int* server2client) {
 
 	close(client2server[WriteEnd]);
@@ -18,6 +19,7 @@ void server(int* client2server, int* server2client) {
 		sscanf(data, "%d %d", &start, &end);
 		if (start == 0 && end == 0) {
 			close(server2client[WriteEnd]);
+			printf("child process(server) exits...\n");
 			exit(0);
 		}
 		printf("SERVER received: start = %d end = %d\n", start, end);
